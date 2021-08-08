@@ -36,7 +36,7 @@ export class SingleThreadParser extends ParserCommand implements ParserCommandIn
    */
   protected onReadLineData(line: string) {
     if (this.lineCount === 0) {
-      this.csvLineReader.csvColumnHeaders = line;
+      this.csvLineReader.csvColumnHeaders = line.split(',');
       this.lineCount++;
 
       return;
@@ -59,8 +59,9 @@ export class SingleThreadParser extends ParserCommand implements ParserCommandIn
    */
   protected onReadLineEnd() {
     const portfolio = this.portfolioService.getPortfolio();
-    console.log(JSON.stringify(portfolio, null, 2)); // Pretty print with 2 spaces
 
+    this.showPortfolioInFiat(portfolio);
+    console.log('Total transactions ' + this.portfolioService.getTransactionCount());
     console.timeEnd('Duration');
   }
 }

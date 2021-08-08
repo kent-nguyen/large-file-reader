@@ -58,8 +58,8 @@ export class CsvLineReader {
     this.setFieldIndexes();
   }
 
-  set csvColumnHeaders(strHeaders: string) {
-    this.csvColumnNames = strHeaders.split(',');
+  set csvColumnHeaders(csvHeaders: string[]) {
+    this.csvColumnNames = csvHeaders;
     // Re-map the column index
     this.setFieldIndexes();
   }

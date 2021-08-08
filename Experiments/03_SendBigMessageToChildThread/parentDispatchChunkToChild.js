@@ -4,7 +4,7 @@
  *
  * When read large file using stream, we should not send data chunk
  * from parent thread to child thread for processing, because the overhead
- * for sending message trans-process too bigger, comparing to the speed gaining
+ * for sending message trans-process too big, comparing to the speed gaining
  * from off-load the processing to child thread. 
  *
  *

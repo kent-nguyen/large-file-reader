@@ -18,7 +18,15 @@ export class PortfolioService {
    */
   protected portfolio: PortfolioInterface = {};
 
+  /**
+   * Filter by token, or date or both
+   */
   protected transactionFilter: TransactionFilterInterface | null = null;
+
+  /**
+   * Number of transaction we have added so far
+   */
+  protected transactionCount = 0;
 
   /**
    * Create filter from user options, to accept only token or time user interest.
@@ -66,6 +74,8 @@ export class PortfolioService {
     } else if (transaction.transactionType === TransactionType.WITHDRAWAL) {
       this.portfolio[token] -= transaction.amount;
     }
+
+    this.transactionCount++;
   }
 
   /**
@@ -73,5 +83,29 @@ export class PortfolioService {
    */
   public getPortfolio() {
     return this.portfolio;
+  }
+
+  /**
+   * @returns {number}
+   */
+  public getTransactionCount() {
+    return this.transactionCount;
+  }
+
+  /**
+   * Add two portfolios and return the new sum portfolio
+   * 
+   * @param {PortfolioInterface} pA
+   * @param {PortfolioInterface} pB
+   */
+  public sumPortfolio(pA: PortfolioInterface, pB: PortfolioInterface): PortfolioInterface {
+    // Merge all possible tokens
+    let merged: PortfolioInterface = { ...pA, ...pB };
+
+    for (let token in merged) {
+      merged[token] = (pA[token] ?? 0) + (pB[token] ?? 0);
+    }
+
+    return merged;
   }
 }

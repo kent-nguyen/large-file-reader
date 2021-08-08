@@ -25,6 +25,8 @@
     "build": "rm -rf dist/* && tsc --extendedDiagnostics"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
     "yargs": "^17.1.0"
   },
   "devDependencies": {
